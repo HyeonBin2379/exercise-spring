@@ -21,6 +21,16 @@
       <version>6.0.0</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.el</groupId>
+      <artifactId>jakarta.el-api</artifactId>
+      <version>5.0.1</version>
+    </dependency>
 
     <!-- spring-webmvc : servlet api를 기반으로 클라이언트의 요청을 처리하는 모듈 -->
     <dependency>
