@@ -21,6 +21,8 @@
       <version>6.0.0</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- jakarta : javax 대체 모듈 -->
     <dependency>
       <groupId>org.glassfish.web</groupId>
       <artifactId>jakarta.servlet.jsp.jstl</artifactId>
@@ -30,6 +32,18 @@
       <groupId>jakarta.el</groupId>
       <artifactId>jakarta.el-api</artifactId>
       <version>5.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+      <version>3.0.2</version>
+    </dependency>
+
+    <!-- hibernate : Java 환경에서 사용하는 객체/관계형 매핑 솔루션 -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>8.0.1.Final</version>
     </dependency>
 
     <!-- spring-webmvc : servlet api를 기반으로 클라이언트의 요청을 처리하는 모듈 -->
