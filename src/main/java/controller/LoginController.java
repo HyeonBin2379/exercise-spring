@@ -1,12 +1,16 @@
 package controller;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import spring.AuthInfo;
@@ -34,18 +38,16 @@ public class LoginController {
     }
 
     @PostMapping
-    public String submit(LoginCommand loginCommand, Errors errors, HttpSession session,
+    public String submit(@Valid LoginCommand loginCommand, Errors errors, HttpServletRequest request,
             HttpServletResponse response) {
-        new LoginCommandValidator().validate(loginCommand, errors);
         if (errors.hasErrors()) {
             return "login/loginForm";
         }
 
         try {
             AuthInfo authInfo = authService.authenticate(
-                    loginCommand.getEmail(),
-                    loginCommand.getPassword());
-
+                    loginCommand.getEmail(), loginCommand.getPassword());
+            HttpSession session = request.getSession();
             session.setAttribute("authInfo", authInfo);
             response.addCookie(bakeCookie(loginCommand));
             return "login/loginSuccess";
@@ -63,5 +65,10 @@ public class LoginController {
             rememberCookie.setMaxAge(0);
         }
         return rememberCookie;
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(new LoginCommandValidator());
     }
 }

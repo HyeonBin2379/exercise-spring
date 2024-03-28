@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Size;
 
 public class ChangePwdCommand {
 
-    @Size(min=6)
     private String currentPassword;
 
     @Size(min=6)
