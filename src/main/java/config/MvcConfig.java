@@ -1,5 +1,6 @@
 package config;
 
+import controller.CommonExceptionHandler;
 import interceptor.AuthCheckInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +32,14 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/main").setViewName("main");
     }
 
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
+        ms.setBasenames("message.label");
+        ms.setDefaultEncoding("UTF-8");
+        return ms;
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authCheckInterceptor())
@@ -44,10 +53,7 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
-        ms.setBasenames("message.label");
-        ms.setDefaultEncoding("UTF-8");
-        return ms;
+    public CommonExceptionHandler commonExceptionHandler() {
+        return new CommonExceptionHandler();
     }
 }
