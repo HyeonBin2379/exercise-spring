@@ -12,6 +12,10 @@
       org.springframework.web.servlet.DispatcherServlet
     </servlet-class>
     <init-param>
+      <param-name>spring.profiles.active</param-name>
+      <param-value>dev</param-value>
+    </init-param>
+    <init-param>
       <param-name>contextClass</param-name>
       <param-value>
         org.springframework.web.context.support.AnnotationConfigWebApplicationContext
@@ -23,6 +27,8 @@
         config.MemberConfig
         config.MvcConfig
         config.ControllerConfig
+        config.DsRealConfig
+        config.DsDevConfig
       </param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
